@@ -10,7 +10,9 @@ class PayScreen extends StatelessWidget {
         title: const Text('Заказ оплачен'),
       ),
       body: Center(
-        child: Text('PayScreen'),
+        child: Column(
+          children: [Image.asset('fiesta.png')],
+        ),
       ),
     );
   }

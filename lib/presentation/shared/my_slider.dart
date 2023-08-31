@@ -162,6 +162,8 @@ class _Slide extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         child: FadeInImage.assetNetwork(
+          imageErrorBuilder: (context, error, stackTrace) => Image.network(
+              'https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg'),
           placeholder: 'assets/gif2.gif',
           image: imageUrl,
           fit: BoxFit.cover,

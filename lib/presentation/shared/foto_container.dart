@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_app/models/hotel_model_response.dart';
-import 'package:hotel_app/presentation/widgets/my_slider.dart';
+import 'package:hotel_app/presentation/shared/my_slider.dart';
 
 class FotoContainer extends StatelessWidget {
-  final HotelResponse infoHotel;
+  final List<String> listImagesUrl;
 
   const FotoContainer({
     super.key,
     required this.size,
-    required this.infoHotel,
+    required this.listImagesUrl,
   });
 
   final Size size;
@@ -19,9 +18,9 @@ class FotoContainer extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       child: Container(
           height: size.height * 0.35,
-          margin: const EdgeInsets.only(bottom: 16),
+          margin: const EdgeInsets.only(bottom: 10),
           child: MySlider(
-            imagesUrl: infoHotel.imageUrls!,
+            imagesUrl: listImagesUrl,
           )),
     );
   }
