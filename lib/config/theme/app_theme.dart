@@ -5,7 +5,7 @@ class AppTheme {
       scaffoldBackgroundColor: const Color(0xffE8E9EC),
       useMaterial3: true,
       colorSchemeSeed: const Color(0xff0D72FF),
-      appBarTheme: const AppBarTheme(centerTitle: true),
+      appBarTheme: const AppBarTheme(centerTitle: true, elevation: 0),
       fontFamily: 'SF');
 
   final textStyleAppBar = const TextStyle(

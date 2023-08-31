@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:hotel_app/config/theme/app_theme.dart';
 import 'package:hotel_app/helpers/providers/hotel_info_provider.dart';
 import 'package:hotel_app/models/hotel_model_response.dart';
-import 'package:hotel_app/presentation/widgets/foto_container.dart';
-import 'package:hotel_app/presentation/widgets/ratings.dart';
+import 'package:hotel_app/presentation/widgets/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
@@ -15,16 +13,20 @@ class HotelScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final infoHotelProvider = Provider.of<HotelInfoProvider>(context);
     return Scaffold(
-        appBar: AppBar(title: Text('Отель', style: AppTheme().textStyleAppBar)),
-        body: (!infoHotelProvider.isLoading)
-            ? FotoHotelContainer(
-                infoHotel: infoHotelProvider.infoHotel!,
-              )
-            : const Center(
-                child: CircularProgressIndicator(
-                strokeWidth: 4,
-                color: Colors.grey,
-              )));
+      appBar: AppBar(title: Text('Отель', style: AppTheme().textStyleAppBar)),
+      body: (!infoHotelProvider.isLoading)
+          ? FotoHotelContainer(
+              infoHotel: infoHotelProvider.infoHotel!,
+            )
+          : const Center(
+              child: CircularProgressIndicator(
+              strokeWidth: 4,
+              color: Colors.grey,
+            )),
+      floatingActionButtonLocation: FloatingActionButtonLocation
+          .centerDocked, // floatingActionButton: Stack(
+      floatingActionButton: const ButtonBlue(),
+    );
   }
 }
 
@@ -36,17 +38,20 @@ class FotoHotelContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return SingleChildScrollView(
-      child: SizedBox(
-        width: size.width,
-        child: Column(children: [
-          PartUp(size: size, infoHotel: infoHotel),
-          const SizedBox(
-            height: 5,
-          ),
-          PartDown(infoHotel: infoHotel),
-        ]),
-      ),
-    );
+        physics: const BouncingScrollPhysics(),
+        child: SizedBox(
+          width: size.width,
+          child: Column(children: [
+            PartUp(size: size, infoHotel: infoHotel),
+            const SizedBox(
+              height: 5,
+            ),
+            PartDown(infoHotel: infoHotel),
+            const SizedBox(
+              height: 90,
+            ),
+          ]),
+        ));
   }
 }
 
@@ -73,6 +78,9 @@ class PartUp extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 15,
+            ),
             FotoContainer(
               size: size,
               infoHotel: infoHotel,
@@ -105,7 +113,9 @@ class PartDown extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 15),
@@ -121,7 +131,9 @@ class PartDown extends StatelessWidget {
               style:
                   const TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
           const ListTiles(),
-          FilledButton(onPressed: () async {}, child: const Text('dddd'))
+          const SizedBox(
+            height: 15,
+          ),
         ],
       ),
     );
@@ -135,14 +147,31 @@ class ListTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        _ItemListTile(Iconsax.emoji_happy, 'Удобства', 'Самое необходимое'),
-        _ItemListTile(Iconsax.tick_square, 'Что включено', 'Самое необходимое'),
-        _ItemListTile(
-            Iconsax.close_square, 'Что нк включено', 'Самое необходимое')
-      ],
-    );
+    return Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: const Color(0xffFBFBFC),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: const Column(
+          children: [
+            _ItemListTile(Iconsax.emoji_happy, 'Удобства', 'Самое необходимое'),
+            Divider(
+              height: 0,
+              indent: 55,
+              endIndent: 20,
+            ),
+            _ItemListTile(
+                Iconsax.tick_square, 'Что включено', 'Самое необходимое'),
+            Divider(
+              height: 0,
+              indent: 55,
+              endIndent: 20,
+            ),
+            _ItemListTile(
+                Iconsax.close_square, 'Что нк включено', 'Самое необходимое'),
+          ],
+        ));
   }
 }
 
@@ -181,7 +210,12 @@ class Peculiarities extends StatelessWidget {
       alignment: WrapAlignment.start,
       direction: Axis.horizontal,
       children: infoHotel.aboutTheHotel!.peculiarities!
-          .map((i) => Text(i, style: AppTheme().textStyleGreyLetters))
+          .map((i) => Container(
+              padding: const EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: const Color(0xffFBFBFC)),
+              child: Text(i, style: AppTheme().textStyleGreyLetters)))
           .toList(),
     );
   }
