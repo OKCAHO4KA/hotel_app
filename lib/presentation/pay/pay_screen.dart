@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotel_app/config/theme/app_theme.dart';
@@ -8,6 +10,7 @@ class PayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final random = Random();
     final size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
@@ -15,8 +18,6 @@ class PayScreen extends StatelessWidget {
       ),
       body: Container(
         child: Column(
-          //   mainAxisSize: MainAxisSize.min,
-          //   mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
               child: Container(
@@ -26,7 +27,7 @@ class PayScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset('assets/fiesta.png'),
-                    SizedBox(
+                    const SizedBox(
                       height: 32,
                     ),
                     Text('Ваш заказ принят в работу',
@@ -35,7 +36,7 @@ class PayScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 23, vertical: 20),
                       child: Text(
-                          'Подтверждение заказа N104583 может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придёт уведомление.',
+                          'Подтверждение заказа N${random.nextInt(999999)} может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придёт уведомление.',
                           textAlign: TextAlign.center,
                           style: AppTheme().textStyleGreyLetters),
                     ),
@@ -43,23 +44,16 @@ class PayScreen extends StatelessWidget {
                 ),
               ),
             ),
-            //     SizedBox(
-            //       height: size.height * 0.25,
-            //     ),
-            //     Container(
-            //         decoration: const BoxDecoration(color: Color(0xffFFFFFC)),
-            //         width: 94,
-            //         child: Column(children: [
-            //           Image.asset('assets/fiesta.png'),
-            //
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             ButtonBlue(
                 text: "Супер!",
-                onPressed: () => Router.neglect(context, () => context.go('/'))
-                // context.pushReplacement('/', context.go('/')))
-                )
+                onPressed: () async {
+                  await Future.delayed(const Duration(milliseconds: 1200));
+                  Future.microtask(
+                      () => Router.neglect(context, () => context.go('/')));
+                }),
             //         ]))
           ],
         ),

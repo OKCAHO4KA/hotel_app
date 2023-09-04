@@ -5,6 +5,19 @@ import 'package:hotel_app/models/hotel_model_response.dart';
 import 'package:hotel_app/models/rooms_model.dart';
 
 class HotelInfoProvider extends ChangeNotifier {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  String name = '';
+  String surName = '';
+  String dateOfBirth = '';
+  String nationality = '';
+  String passportN = '';
+  String expiryDate = '';
+
+  bool isValidForm() {
+    return formKey.currentState?.validate() ?? false;
+  }
+
   HotelResponse? infoHotel;
   Booking? booking;
   Rooms? listRooms;

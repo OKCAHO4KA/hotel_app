@@ -12,7 +12,7 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
   ),
   GoRoute(
     path: '/booking',
-    builder: (context, state) => const BookingScreen(),
+    builder: (context, state) => BookingScreen(),
   ),
   GoRoute(
     path: '/pay',

@@ -10,6 +10,13 @@ class InfoTourist extends StatelessWidget {
   final Widget trailing;
   final Widget trailing2;
 
+  // TextEditingController nameControl = TextEditingController();
+  // TextEditingController surnameControl = TextEditingController();
+  // TextEditingController dateControl = TextEditingController();
+  // TextEditingController nationalityControl = TextEditingController();
+  // TextEditingController passportNControl = TextEditingController();
+  // TextEditingController expirateDControl = TextEditingController();
+
   InfoTourist(
       {super.key,
       required this.text,
@@ -65,26 +72,70 @@ class _ItemExpandedTileState extends State<_ItemExpandedTile> {
           widget.isExpanded = !widget.isExpanded;
           setState(() {});
         },
-        trailing:
-            // trailing: widget.trailing,
-            widget.isExpanded ? widget.trailing : widget.trailing2,
-        //     ? const _IconExpandedTile(svg: 'assets/vector_55.svg')
-        //     : const _IconExpandedTile(svg: 'assets/vector_551.svg'),
+        trailing: widget.isExpanded ? widget.trailing : widget.trailing2,
         initiallyExpanded: widget.isExpanded,
         title: Text(widget.text, style: AppTheme().textStyleBigLetters),
-        children: const [
-          CustomTextField(labelText: "Имя", hintText: "Иван"),
-          SizedBox(height: 8),
-          CustomTextField(labelText: "Фамилия", hintText: "Иванов"),
-          SizedBox(height: 8),
-          CustomTextField(labelText: "Дата рождения"),
-          SizedBox(height: 8),
-          CustomTextField(labelText: "Гражданство"),
-          SizedBox(height: 8),
-          CustomTextField(labelText: "Номер загранпаспорта"),
-          SizedBox(height: 8),
-          CustomTextField(labelText: "Срок действия загранпаспорта"),
-          SizedBox(height: 8),
+        children: [
+          CustomTextField(
+              typeInput: TextInputType.name,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return '*Поле "Имя" обязательно для заполнения';
+                }
+                return null;
+              },
+              labelText: "Имя",
+              hintText: "Иван"),
+          const SizedBox(height: 8),
+          CustomTextField(
+              typeInput: TextInputType.name,
+              labelText: "Фамилия",
+              hintText: "Иванов",
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return '*Поле "Фамилия" обязательно для заполнения';
+                }
+                return null;
+              }),
+          const SizedBox(height: 8),
+          CustomTextField(
+              typeInput: TextInputType.datetime,
+              labelText: "Дата рождения",
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return '*Поле "Дата рождения" обязательно для заполнения';
+                }
+                return null;
+              }),
+          const SizedBox(height: 8),
+          CustomTextField(
+              labelText: "Гражданство",
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return '*Поле "Гражданство" обязательно для заполнения';
+                }
+                return null;
+              }),
+          const SizedBox(height: 8),
+          CustomTextField(
+              labelText: "Номер загранпаспорта",
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return '*Поле "Номер загранпаспорта" обязательно для заполнения';
+                }
+                return null;
+              }),
+          const SizedBox(height: 8),
+          CustomTextField(
+              typeInput: TextInputType.datetime,
+              labelText: "Срок действия загранпаспорта",
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return '*Поле "Срок действия загранпаспорта" обязательно для заполнения';
+                }
+                return null;
+              }),
+          const SizedBox(height: 8),
         ]);
   }
 }
