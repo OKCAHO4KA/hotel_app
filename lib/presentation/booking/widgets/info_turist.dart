@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hotel_app/config/theme/app_theme.dart';
+import 'package:hotel_app/helpers/providers/hotel_info_provider.dart';
 import 'package:hotel_app/presentation/booking/widgets/custom_text_field.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class InfoTourist extends StatelessWidget {
@@ -56,6 +58,7 @@ class _ItemExpandedTile extends StatefulWidget {
 class _ItemExpandedTileState extends State<_ItemExpandedTile> {
   @override
   Widget build(BuildContext context) {
+    final prov = Provider.of<HotelInfoProvider>(context);
     return ExpansionTile(
         shape: const Border(),
         tilePadding: const EdgeInsets.all(0),
@@ -68,65 +71,107 @@ class _ItemExpandedTileState extends State<_ItemExpandedTile> {
         initiallyExpanded: widget.isExpanded,
         title: Text(widget.text, style: AppTheme().textStyleBigLetters),
         children: [
+          const SizedBox(
+            height: 16,
+          ),
           CustomTextField(
-              typeInput: TextInputType.name,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return '*Поле "Имя" обязательно для заполнения';
-                }
+              onChanged: (value) {
+                prov.isValidForm();
                 return null;
               },
+              typeInput: TextInputType.name,
+              validator: widget.isExpanded
+                  ? (value) {
+                      if (value!.isEmpty) {
+                        return '*Поле "Имя" обязательно для заполнения';
+                      }
+                      return null;
+                    }
+                  : null,
               labelText: "Имя",
               hintText: "Иван"),
           const SizedBox(height: 8),
           CustomTextField(
-              typeInput: TextInputType.name,
-              labelText: "Фамилия",
-              hintText: "Иванов",
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return '*Поле "Фамилия" обязательно для заполнения';
-                }
-                return null;
-              }),
+            typeInput: TextInputType.name,
+            labelText: "Фамилия",
+            hintText: "Иванов",
+            onChanged: (value) {
+              prov.isValidForm();
+              return null;
+            },
+            validator: widget.isExpanded
+                ? (value) {
+                    if (value!.isEmpty) {
+                      return '*Поле "Фамилия" обязательно для заполнения';
+                    }
+                    return null;
+                  }
+                : null,
+          ),
           const SizedBox(height: 8),
           CustomTextField(
               typeInput: TextInputType.datetime,
               labelText: "Дата рождения",
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return '*Поле "Дата рождения" обязательно для заполнения';
-                }
+              onChanged: (value) {
+                prov.isValidForm();
                 return null;
-              }),
+              },
+              validator: widget.isExpanded
+                  ? (value) {
+                      if (value!.isEmpty) {
+                        return '*Поле "Дата рождения" обязательно для заполнения';
+                      }
+                      return null;
+                    }
+                  : null),
           const SizedBox(height: 8),
           CustomTextField(
+              typeInput: TextInputType.text,
               labelText: "Гражданство",
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return '*Поле "Гражданство" обязательно для заполнения';
-                }
+              onChanged: (value) {
+                prov.isValidForm();
                 return null;
-              }),
+              },
+              validator: widget.isExpanded
+                  ? (value) {
+                      if (value!.isEmpty) {
+                        return '*Поле "Гражданство" обязательно для заполнения';
+                      }
+                      return null;
+                    }
+                  : null),
           const SizedBox(height: 8),
           CustomTextField(
+              typeInput: TextInputType.text,
               labelText: "Номер загранпаспорта",
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return '*Поле "Номер загранпаспорта" обязательно для заполнения';
-                }
+              onChanged: (value) {
+                prov.isValidForm();
                 return null;
-              }),
+              },
+              validator: widget.isExpanded
+                  ? (value) {
+                      if (value!.isEmpty) {
+                        return '*Поле "Номер загранпаспорта" обязательно для заполнения';
+                      }
+                      return null;
+                    }
+                  : null),
           const SizedBox(height: 8),
           CustomTextField(
               typeInput: TextInputType.datetime,
               labelText: "Срок действия загранпаспорта",
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return '*Поле "Срок действия загранпаспорта" обязательно для заполнения';
-                }
+              onChanged: (value) {
+                prov.isValidForm();
                 return null;
-              }),
+              },
+              validator: widget.isExpanded
+                  ? (value) {
+                      if (value!.isEmpty) {
+                        return '*Поле "Срок действия загранпаспорта" обязательно для заполнения';
+                      }
+                      return null;
+                    }
+                  : null),
           const SizedBox(height: 8),
         ]);
   }

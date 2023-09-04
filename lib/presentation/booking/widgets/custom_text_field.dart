@@ -10,7 +10,6 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? typeInput;
   final String? Function(String)? onChanged;
 
-  // final bool enabled;
   final TextEditingController? controller;
   const CustomTextField({
     super.key,
@@ -22,7 +21,6 @@ class CustomTextField extends StatelessWidget {
     this.typeInput,
     this.controller,
     this.onChanged,
-    // required this.enabled,
   });
 
   @override
@@ -33,7 +31,6 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       onChanged: (value) => onChanged!(value),
       controller: controller,
-      // enabled: enabled,
       keyboardType: typeInput,
       validator: validator,
       maxLength: maxLength,

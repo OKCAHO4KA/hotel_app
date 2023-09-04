@@ -36,7 +36,7 @@ class _InfoClientState extends State<InfoClient> {
 
   @override
   Widget build(BuildContext context) {
-    final pro = Provider.of<HotelInfoProvider>(context);
+    final hotelInfoProvider = Provider.of<HotelInfoProvider>(context);
     return Container(
       margin: const EdgeInsets.only(top: 8),
       padding: const EdgeInsets.all(16),
@@ -55,7 +55,7 @@ class _InfoClientState extends State<InfoClient> {
           CustomTextField(
             onChanged: (value) {
               phoneControl.text = value;
-              pro.isValidForm();
+              hotelInfoProvider.isValidForm();
               return null;
             },
             controller: phoneControl,
@@ -78,11 +78,10 @@ class _InfoClientState extends State<InfoClient> {
           CustomTextField(
             onChanged: (value) {
               emailControl.text = value;
-              pro.isValidForm();
+              hotelInfoProvider.isValidForm();
               return null;
             },
             controller: emailControl,
-            // enabled: true,
             typeInput: TextInputType.emailAddress,
             labelText: "Почта",
             hintText: 'yandex@yandex.ru',
