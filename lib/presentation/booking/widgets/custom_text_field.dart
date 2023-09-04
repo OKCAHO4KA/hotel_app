@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   final String labelText;
   final String? hintText;
+  final int? maxLength;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     super.key,
     required this.labelText,
     this.hintText = '',
+    this.maxLength,
+    this.inputFormatters,
   });
 
   @override
@@ -16,6 +21,8 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
         borderSide: const BorderSide(color: Colors.transparent));
     return TextFormField(
+      maxLength: maxLength,
+      inputFormatters: inputFormatters,
       style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_app/config/method_get_price.dart';
 import 'package:hotel_app/config/theme/app_theme.dart';
 import 'package:hotel_app/helpers/providers/hotel_info_provider.dart';
-import 'package:hotel_app/presentation/hotel/widgets/hotel_name_adress.dart';
 import 'package:hotel_app/presentation/shared/widgets.dart';
 
 class Room extends StatelessWidget {

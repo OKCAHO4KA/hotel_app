@@ -26,6 +26,7 @@ class InfoClient extends StatelessWidget {
                   style: AppTheme().textStyleBigLetters),
             ),
             const CustomTextField(
+              inputFormatters: [],
               labelText: 'Номер телефона',
               hintText: '+7 (***) ***-**-**',
             ),

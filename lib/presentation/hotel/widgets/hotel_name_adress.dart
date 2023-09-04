@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_app/config/method_get_price.dart';
 import 'package:hotel_app/config/theme/app_theme.dart';
 import 'package:hotel_app/models/hotel_model_response.dart';
 
@@ -46,19 +47,4 @@ class HotelNameAdress extends StatelessWidget {
       ],
     );
   }
-}
-
-List<String> getPrice(int price) {
-  String a;
-  String b;
-  List<String> newPrice = [];
-
-  a = price.toString();
-  b = price.toString();
-  a = a.substring(0, 3);
-  b = b.substring(3);
-
-  newPrice.add(a);
-  newPrice.add(b);
-  return newPrice;
 }

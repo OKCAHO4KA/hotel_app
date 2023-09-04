@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_app/config/theme/app_theme.dart';
 import 'package:hotel_app/models/booking_model.dart';
+import 'package:hotel_app/presentation/booking/widgets/table_cell.dart';
 
 class TableView extends StatelessWidget {
   const TableView({
@@ -24,73 +25,61 @@ class TableView extends StatelessWidget {
         1: FlexColumnWidth(.6),
       }, children: [
         TableRow(children: [
-          _TableCell(
-            text: 'Вылет из',
-            textStyle: AppTheme().textStyleGreyLetters,
+          Align(
+            child: CustomTableCell(
+              text: 'Вылет из',
+              textStyle: AppTheme().textStyleGreyLetters,
+            ),
           ),
-          _TableCell(
+          CustomTableCell(
               text: infoBooking!.departure!,
               textStyle: AppTheme().textStyleBlackLetters),
         ]),
         TableRow(children: [
-          _TableCell(
+          CustomTableCell(
               text: 'Страна, город',
               textStyle: AppTheme().textStyleGreyLetters),
-          _TableCell(
+          CustomTableCell(
               text: infoBooking!.arrivalCountry!,
               textStyle: AppTheme().textStyleBlackLetters),
         ]),
         TableRow(children: [
-          _TableCell(text: 'Даты', textStyle: AppTheme().textStyleGreyLetters),
-          _TableCell(
+          CustomTableCell(
+              text: 'Даты', textStyle: AppTheme().textStyleGreyLetters),
+          CustomTableCell(
               text:
                   '${infoBooking!.tourDateStart} - ${infoBooking!.tourDateStop}',
               textStyle: AppTheme().textStyleBlackLetters),
         ]),
         TableRow(children: [
-          _TableCell(
+          CustomTableCell(
               text: 'Кол-во ночей', textStyle: AppTheme().textStyleGreyLetters),
-          _TableCell(
+          CustomTableCell(
               text: '${infoBooking!.numberOfNights} ночей',
               textStyle: AppTheme().textStyleBlackLetters)
         ]),
         TableRow(children: [
-          _TableCell(text: 'Отель', textStyle: AppTheme().textStyleGreyLetters),
-          _TableCell(
+          CustomTableCell(
+              text: 'Отель', textStyle: AppTheme().textStyleGreyLetters),
+          CustomTableCell(
               text: infoBooking!.hotelName,
               textStyle: AppTheme().textStyleBlackLetters)
         ]),
         TableRow(children: [
-          _TableCell(text: 'Номер', textStyle: AppTheme().textStyleGreyLetters),
-          _TableCell(
+          CustomTableCell(
+              text: 'Номер', textStyle: AppTheme().textStyleGreyLetters),
+          CustomTableCell(
               text: infoBooking!.room!,
               textStyle: AppTheme().textStyleBlackLetters)
         ]),
         TableRow(children: [
-          _TableCell(
+          CustomTableCell(
               text: 'Питание', textStyle: AppTheme().textStyleGreyLetters),
-          _TableCell(
+          CustomTableCell(
               text: infoBooking!.nutrition!,
               textStyle: AppTheme().textStyleBlackLetters)
         ]),
       ]),
-    );
-  }
-}
-
-class _TableCell extends StatelessWidget {
-  final String text;
-  final TextStyle? textStyle;
-  const _TableCell({
-    required this.text,
-    this.textStyle,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Text(text, style: textStyle),
     );
   }
 }

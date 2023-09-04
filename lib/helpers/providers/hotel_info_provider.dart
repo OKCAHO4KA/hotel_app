@@ -10,6 +10,7 @@ class HotelInfoProvider extends ChangeNotifier {
   Rooms? listRooms;
   bool _isLoading = true;
   bool get isLoading => _isLoading;
+  int totalPay = 0;
 
   set isLoading(bool value) {
     _isLoading = value;
@@ -62,5 +63,12 @@ class HotelInfoProvider extends ChangeNotifier {
       return;
     }
     notifyListeners();
+  }
+
+  int getTotalPay() {
+    totalPay =
+        booking!.tourPrice! + booking!.fuelCharge! + booking!.serviceCharge!;
+
+    return totalPay;
   }
 }

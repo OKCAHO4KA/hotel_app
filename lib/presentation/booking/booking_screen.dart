@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hotel_app/config/theme/app_theme.dart';
+import 'package:hotel_app/config/method_get_price.dart';
 import 'package:hotel_app/helpers/providers/hotel_info_provider.dart';
-import 'package:hotel_app/presentation/booking/widgets/custom_text_field.dart';
 import 'package:hotel_app/presentation/booking/widgets/hotel_name_adress.dart';
-import 'package:hotel_app/presentation/booking/widgets/info_cclient.dart';
+import 'package:hotel_app/presentation/booking/widgets/info_client.dart';
+import 'package:hotel_app/presentation/booking/widgets/info_turist.dart';
+import 'package:hotel_app/presentation/booking/widgets/subtotal.dart';
 import 'package:hotel_app/presentation/booking/widgets/table_view.dart';
+import 'package:hotel_app/presentation/shared/button_blue.dart';
 import 'package:provider/provider.dart';
 
 class BookingScreen extends StatelessWidget {
@@ -13,7 +15,9 @@ class BookingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final infoBooking = Provider.of<HotelInfoProvider>(context).booking;
+    final infoBooking = Provider.of<HotelInfoProvider>(context);
+    final List<String> totalPay = getPrice(infoBooking.getTotalPay());
+
     return Scaffold(
         appBar: AppBar(
             leading: IconButton(
@@ -28,51 +32,78 @@ class BookingScreen extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           child: Column(children: [
             HotelNameAdress(
-              infoBooking: infoBooking,
+              infoBooking: infoBooking.booking,
             ),
-            TableView(infoBooking: infoBooking),
+            TableView(
+              infoBooking: infoBooking.booking,
+            ),
             const InfoClient(),
-            const InfoTourist()
+            InfoTourist(
+              trailing: const IconExpandedTile(svg: 'assets/vector_55.svg'),
+              trailing2: const IconExpandedTile(svg: 'assets/vector_551.svg'),
+              text: "Первый турист",
+              isExpanded: true,
+            ),
+            InfoTourist(
+              trailing: const IconExpandedTile(svg: 'assets/vector_55.svg'),
+              trailing2: const IconExpandedTile(svg: 'assets/vector_551.svg'),
+              text: "Второй турист",
+              isExpanded: false,
+            ),
+            InfoTourist(
+              trailing: const _IconOpenTourist(),
+              trailing2: const _IconCloseTourist(),
+              text: "Добавить туриста",
+              isExpanded: false,
+            ),
+            Subtotal(
+              infoBooking: infoBooking.booking!,
+            ),
+            const SizedBox(height: 8),
+            ButtonBlue(
+                text: "Оплатить ${totalPay[0]} ${totalPay[1]} ₽",
+                onPressed: () {
+                  context.push('/pay');
+                })
           ]),
         ));
   }
 }
 
-class InfoTourist extends StatelessWidget {
-  const InfoTourist({
+class _IconCloseTourist extends StatelessWidget {
+  const _IconCloseTourist({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.all(16),
+        width: 34,
+        height: 34,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.0),
-          color: Colors.white,
-        ),
-        margin: const EdgeInsets.only(top: 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child:
-                  Text("Первый турист", style: AppTheme().textStyleBigLetters),
-            ),
-            const CustomTextField(labelText: "Имя", hintText: "Иван"),
-            const SizedBox(height: 8),
-            const CustomTextField(labelText: "Фамилия", hintText: "Иванов"),
-            const SizedBox(height: 8),
-            const CustomTextField(labelText: "Дата рождения"),
-            const SizedBox(height: 8),
-            const CustomTextField(labelText: "Гражданство"),
-            const SizedBox(height: 8),
-            const CustomTextField(labelText: "Номер загранпаспорта"),
-            const SizedBox(height: 8),
-            const CustomTextField(labelText: "Срок действия загранпаспорта"),
-            const SizedBox(height: 8),
-          ],
-        ));
+            borderRadius: BorderRadius.circular(6.0),
+            color: const Color.fromRGBO(13, 114, 255, 0.1)),
+        child: const Icon(Icons.add, color: Color(0xff0D72FF)));
+  }
+}
+
+class _IconOpenTourist extends StatelessWidget {
+  const _IconOpenTourist({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 34,
+      height: 34,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6.0),
+          color: const Color.fromRGBO(13, 114, 255, 0.1)),
+      child: const Icon(
+        Icons.remove,
+        color: Color(0xff0D72FF),
+      ),
+    );
   }
 }
