@@ -8,8 +8,10 @@ class CustomTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
   final TextInputType? typeInput;
-  // final bool enabled;
+  final String? Function(String)? onChanged;
 
+  // final bool enabled;
+  final TextEditingController? controller;
   const CustomTextField({
     super.key,
     required this.labelText,
@@ -18,6 +20,8 @@ class CustomTextField extends StatelessWidget {
     this.inputFormatters,
     this.validator,
     this.typeInput,
+    this.controller,
+    this.onChanged,
     // required this.enabled,
   });
 
@@ -27,6 +31,8 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
         borderSide: const BorderSide(color: Colors.transparent));
     return TextFormField(
+      onChanged: (value) => onChanged!(value),
+      controller: controller,
       // enabled: enabled,
       keyboardType: typeInput,
       validator: validator,
@@ -38,6 +44,15 @@ class CustomTextField extends StatelessWidget {
           color: Colors.black,
           letterSpacing: 0.75),
       decoration: InputDecoration(
+        errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+          color: const Color(0xffEB5757).withOpacity(0.15),
+        )),
+        errorStyle: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w300,
+          color: Color(0xffEB5757),
+        ),
         enabledBorder: outlineInputBorder,
         focusedBorder: outlineInputBorder,
         fillColor: const Color(0xffF6F6F9),

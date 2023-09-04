@@ -10,13 +10,6 @@ class InfoTourist extends StatelessWidget {
   final Widget trailing;
   final Widget trailing2;
 
-  // TextEditingController nameControl = TextEditingController();
-  // TextEditingController surnameControl = TextEditingController();
-  // TextEditingController dateControl = TextEditingController();
-  // TextEditingController nationalityControl = TextEditingController();
-  // TextEditingController passportNControl = TextEditingController();
-  // TextEditingController expirateDControl = TextEditingController();
-
   InfoTourist(
       {super.key,
       required this.text,
@@ -27,7 +20,6 @@ class InfoTourist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        // padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
           color: Colors.white,

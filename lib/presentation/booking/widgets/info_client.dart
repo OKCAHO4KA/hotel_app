@@ -1,19 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_app/config/theme/app_theme.dart';
+import 'package:hotel_app/helpers/providers/hotel_info_provider.dart';
 import 'package:hotel_app/presentation/booking/widgets/custom_text_field.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:provider/provider.dart';
 
-class InfoClient extends StatelessWidget {
+class InfoClient extends StatefulWidget {
   InfoClient({
     super.key,
   });
+
+  @override
+  State<InfoClient> createState() => _InfoClientState();
+}
+
+class _InfoClientState extends State<InfoClient> {
+  final TextEditingController phoneControl = TextEditingController();
+  final TextEditingController emailControl = TextEditingController();
   var maskFormatter = MaskTextInputFormatter(
       mask: '+7(###)###-##-##',
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    phoneControl.dispose();
+    emailControl.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // final pro = Provider.of<HotelInfoProvider>(context);
+    final pro = Provider.of<HotelInfoProvider>(context);
     return Container(
       margin: const EdgeInsets.only(top: 8),
       padding: const EdgeInsets.all(16),
@@ -30,7 +53,12 @@ class InfoClient extends StatelessWidget {
                 style: AppTheme().textStyleBigLetters),
           ),
           CustomTextField(
-            // enabled: true,
+            onChanged: (value) {
+              phoneControl.text = value;
+              pro.isValidForm();
+              return null;
+            },
+            controller: phoneControl,
             typeInput: TextInputType.phone,
             validator: (value) {
               if (value!.isEmpty) {
@@ -48,12 +76,18 @@ class InfoClient extends StatelessWidget {
             height: 8,
           ),
           CustomTextField(
+            onChanged: (value) {
+              emailControl.text = value;
+              pro.isValidForm();
+              return null;
+            },
+            controller: emailControl,
             // enabled: true,
             typeInput: TextInputType.emailAddress,
             labelText: "Почта",
             hintText: 'yandex@yandex.ru',
             validator: (value) {
-              if (!value!.isValidEmail) return 'Проверьте правильность почты';
+              if (!value!.isValidEmail) return '*Проверьте правильность почты';
               return null;
             },
           ),
