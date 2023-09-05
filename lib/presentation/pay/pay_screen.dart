@@ -25,7 +25,11 @@ class PayScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/fiesta.png'),
+                  Image.asset(
+                    'assets/fiesta.png',
+                    width: 94,
+                    height: 94,
+                  ),
                   const SizedBox(
                     height: 32,
                   ),
