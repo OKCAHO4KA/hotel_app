@@ -6,7 +6,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 
 class InfoClient extends StatefulWidget {
-  InfoClient({
+  const InfoClient({
     super.key,
   });
 
@@ -15,24 +15,10 @@ class InfoClient extends StatefulWidget {
 }
 
 class _InfoClientState extends State<InfoClient> {
-  final TextEditingController phoneControl = TextEditingController();
-  final TextEditingController emailControl = TextEditingController();
   var maskFormatter = MaskTextInputFormatter(
       mask: '+7(###)###-##-##',
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    phoneControl.dispose();
-    emailControl.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +40,9 @@ class _InfoClientState extends State<InfoClient> {
           ),
           CustomTextField(
             onChanged: (value) {
-              phoneControl.text = value;
               hotelInfoProvider.isValidForm();
               return null;
             },
-            controller: phoneControl,
             typeInput: TextInputType.phone,
             validator: (value) {
               if (value!.isEmpty) {
@@ -77,11 +61,9 @@ class _InfoClientState extends State<InfoClient> {
           ),
           CustomTextField(
             onChanged: (value) {
-              emailControl.text = value;
               hotelInfoProvider.isValidForm();
               return null;
             },
-            controller: emailControl,
             typeInput: TextInputType.emailAddress,
             labelText: "Почта",
             hintText: 'yandex@yandex.ru',

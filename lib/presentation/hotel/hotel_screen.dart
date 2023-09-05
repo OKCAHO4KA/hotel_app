@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotel_app/config/theme/app_theme.dart';
 import 'package:hotel_app/helpers/providers/hotel_info_provider.dart';
@@ -6,7 +7,6 @@ import 'package:hotel_app/models/hotel_model_response.dart';
 import 'package:hotel_app/presentation/hotel/widgets/part_down.dart';
 import 'package:hotel_app/presentation/hotel/widgets/part_up.dart';
 import 'package:hotel_app/presentation/shared/widgets.dart';
-import 'package:provider/provider.dart';
 
 class HotelScreen extends StatelessWidget {
   const HotelScreen({super.key});
@@ -55,7 +55,7 @@ class FotoHotelContainer extends StatelessWidget {
             ),
             PartDown(infoHotel: infoHotel),
             const SizedBox(
-              height: 90,
+              height: 85,
             ),
           ]),
         ));

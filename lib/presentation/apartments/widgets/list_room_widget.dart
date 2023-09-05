@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:hotel_app/helpers/providers/hotel_info_provider.dart';
 import 'package:hotel_app/presentation/apartments/widgets/room_widget.dart';
 import 'package:hotel_app/presentation/shared/widgets.dart';
-import 'package:provider/provider.dart';
 
 class ListRooms extends StatelessWidget {
   const ListRooms({

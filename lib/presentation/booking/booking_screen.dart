@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:hotel_app/config/method_get_price.dart';
 import 'package:hotel_app/helpers/providers/hotel_info_provider.dart';
 import 'package:hotel_app/presentation/booking/widgets/hotel_name_adress.dart';
@@ -8,11 +9,9 @@ import 'package:hotel_app/presentation/booking/widgets/info_turist.dart';
 import 'package:hotel_app/presentation/booking/widgets/subtotal.dart';
 import 'package:hotel_app/presentation/booking/widgets/table_view.dart';
 import 'package:hotel_app/presentation/shared/button_blue.dart';
-import 'package:provider/provider.dart';
 
 class BookingScreen extends StatelessWidget {
-  BookingScreen({super.key});
-  // final _formKey = GlobalKey<FormState>();
+  const BookingScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final infoBooking = Provider.of<HotelInfoProvider>(context);
@@ -39,7 +38,7 @@ class BookingScreen extends StatelessWidget {
               TableView(
                 infoBooking: infoBooking.booking,
               ),
-              InfoClient(),
+              const InfoClient(),
               InfoTourist(
                 trailing: const IconExpandedTile(svg: 'assets/vector_55.svg'),
                 trailing2: const IconExpandedTile(svg: 'assets/vector_551.svg'),
@@ -65,23 +64,12 @@ class BookingScreen extends StatelessWidget {
               ButtonBlue(
                 text: "Оплатить ${totalPay[0]} ${totalPay[1]} ₽",
                 onPressed: () {
-                  if (infoBooking.isValidForm())
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('OK')),
-                    );
-                  // context.push('/pay');
-                  // }
-                  // null;
-                },
+                  if (infoBooking.isValidForm()) {
+                    Router.neglect(context, () => context.go('/pay'));
+                  }
 
-                //   if (_formKey.currentState!.validate()) {
-                //     ScaffoldMessenger.of(context).showSnackBar(
-                //       const SnackBar(content: Text('Processing Data')),
-                //     );
-                //     context.push('/pay');
-                //   }
-                //   null;
-                // },
+                  null;
+                },
               )
             ]),
           ),

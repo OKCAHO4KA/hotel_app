@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hotel_app/config/theme/app_theme.dart';
 import 'package:hotel_app/helpers/providers/hotel_info_provider.dart';
 import 'package:hotel_app/presentation/booking/widgets/custom_text_field.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -58,6 +59,14 @@ class _ItemExpandedTile extends StatefulWidget {
 class _ItemExpandedTileState extends State<_ItemExpandedTile> {
   @override
   Widget build(BuildContext context) {
+    var maskFormatterDate = MaskTextInputFormatter(
+        mask: "##/##/####",
+        filter: {"#": RegExp(r'[0-9]')},
+        type: MaskAutoCompletionType.lazy);
+    var maskFormatterPassportNumber = MaskTextInputFormatter(
+        mask: "## #######",
+        filter: {"#": RegExp(r'[0-9]')},
+        type: MaskAutoCompletionType.lazy);
     final prov = Provider.of<HotelInfoProvider>(context);
     return ExpansionTile(
         shape: const Border(),
@@ -110,6 +119,7 @@ class _ItemExpandedTileState extends State<_ItemExpandedTile> {
           ),
           const SizedBox(height: 8),
           CustomTextField(
+              inputFormatters: [maskFormatterDate],
               typeInput: TextInputType.datetime,
               labelText: "Дата рождения",
               onChanged: (value) {
@@ -142,6 +152,7 @@ class _ItemExpandedTileState extends State<_ItemExpandedTile> {
                   : null),
           const SizedBox(height: 8),
           CustomTextField(
+              inputFormatters: [maskFormatterPassportNumber],
               typeInput: TextInputType.text,
               labelText: "Номер загранпаспорта",
               onChanged: (value) {
@@ -158,6 +169,7 @@ class _ItemExpandedTileState extends State<_ItemExpandedTile> {
                   : null),
           const SizedBox(height: 8),
           CustomTextField(
+              inputFormatters: [maskFormatterDate],
               typeInput: TextInputType.datetime,
               labelText: "Срок действия загранпаспорта",
               onChanged: (value) {

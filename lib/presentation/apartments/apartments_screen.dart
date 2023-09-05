@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotel_app/helpers/providers/hotel_info_provider.dart';
-import 'package:provider/provider.dart';
-
 import 'widgets/list_room_widget.dart';
 
 class ApartmentsScreen extends StatelessWidget {
