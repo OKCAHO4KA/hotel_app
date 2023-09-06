@@ -96,7 +96,9 @@ class _ItemExpandedTileState extends State<_ItemExpandedTile> {
                       }
                       return null;
                     }
-                  : null,
+                  : (value) {
+                      return null;
+                    },
               labelText: "Имя",
               hintText: "Иван"),
           const SizedBox(height: 8),
@@ -115,75 +117,89 @@ class _ItemExpandedTileState extends State<_ItemExpandedTile> {
                     }
                     return null;
                   }
-                : null,
+                : (value) {
+                    return null;
+                  },
           ),
           const SizedBox(height: 8),
           CustomTextField(
-              inputFormatters: [maskFormatterDate],
-              typeInput: TextInputType.datetime,
-              labelText: "Дата рождения",
-              onChanged: (value) {
-                prov.isValidForm();
-                return null;
-              },
-              validator: widget.isExpanded
-                  ? (value) {
-                      if (value!.isEmpty) {
-                        return '*Поле "Дата рождения" обязательно для заполнения';
-                      }
-                      return null;
+            inputFormatters: [maskFormatterDate],
+            typeInput: TextInputType.datetime,
+            labelText: "Дата рождения",
+            onChanged: (value) {
+              prov.isValidForm();
+              return null;
+            },
+            validator: widget.isExpanded
+                ? (value) {
+                    if (value!.isEmpty) {
+                      return '*Поле "Дата рождения" обязательно для заполнения';
                     }
-                  : null),
+                    return null;
+                  }
+                : (value) {
+                    return null;
+                  },
+          ),
           const SizedBox(height: 8),
           CustomTextField(
-              typeInput: TextInputType.text,
-              labelText: "Гражданство",
-              onChanged: (value) {
-                prov.isValidForm();
-                return null;
-              },
-              validator: widget.isExpanded
-                  ? (value) {
-                      if (value!.isEmpty) {
-                        return '*Поле "Гражданство" обязательно для заполнения';
-                      }
-                      return null;
+            typeInput: TextInputType.text,
+            labelText: "Гражданство",
+            onChanged: (value) {
+              prov.isValidForm();
+              return null;
+            },
+            validator: widget.isExpanded
+                ? (value) {
+                    if (value!.isEmpty) {
+                      return '*Поле "Гражданство" обязательно для заполнения';
                     }
-                  : null),
+                    return null;
+                  }
+                : (value) {
+                    return null;
+                  },
+          ),
           const SizedBox(height: 8),
           CustomTextField(
-              inputFormatters: [maskFormatterPassportNumber],
-              typeInput: TextInputType.text,
-              labelText: "Номер загранпаспорта",
-              onChanged: (value) {
-                prov.isValidForm();
-                return null;
-              },
-              validator: widget.isExpanded
-                  ? (value) {
-                      if (value!.isEmpty) {
-                        return '*Поле "Номер загранпаспорта" обязательно для заполнения';
-                      }
-                      return null;
+            inputFormatters: [maskFormatterPassportNumber],
+            typeInput: TextInputType.text,
+            labelText: "Номер загранпаспорта",
+            onChanged: (value) {
+              prov.isValidForm();
+              return null;
+            },
+            validator: widget.isExpanded
+                ? (value) {
+                    if (value!.isEmpty) {
+                      return '*Поле "Номер загранпаспорта" обязательно для заполнения';
                     }
-                  : null),
+                    return null;
+                  }
+                : (value) {
+                    return null;
+                  },
+          ),
           const SizedBox(height: 8),
           CustomTextField(
-              inputFormatters: [maskFormatterDate],
-              typeInput: TextInputType.datetime,
-              labelText: "Срок действия загранпаспорта",
-              onChanged: (value) {
-                prov.isValidForm();
-                return null;
-              },
-              validator: widget.isExpanded
-                  ? (value) {
-                      if (value!.isEmpty) {
-                        return '*Поле "Срок действия загранпаспорта" обязательно для заполнения';
-                      }
-                      return null;
+            inputFormatters: [maskFormatterDate],
+            typeInput: TextInputType.datetime,
+            labelText: "Срок действия загранпаспорта",
+            onChanged: (value) {
+              prov.isValidForm();
+              return null;
+            },
+            validator: widget.isExpanded
+                ? (value) {
+                    if (value!.isEmpty) {
+                      return '*Поле "Срок действия загранпаспорта" обязательно для заполнения';
                     }
-                  : null),
+                    return null;
+                  }
+                : (value) {
+                    return null;
+                  },
+          ),
           const SizedBox(height: 8),
         ]);
   }
